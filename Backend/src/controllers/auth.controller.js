@@ -12,7 +12,7 @@ import { sendEmail } from "../services/email.service.js";
 import { otpModel } from "../models/otp.model.js";
 
 const refreshCookieOptions = {
-  httpOnly: true,
+  httpOnly: false,
   secure: true,
   sameSite: "none",
   maxAge: 7 * 24 * 60 * 60 * 1000,
