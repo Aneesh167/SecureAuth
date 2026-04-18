@@ -1,4 +1,5 @@
 import axios from "axios";
+import { refreshToken } from "./authApi";
 
 export const api = axios.create({
   baseURL: import.meta.env.VITE_API_BASE_URL,
@@ -36,11 +37,7 @@ api.interceptors.response.use(
       originalRequest._retry = true;
 
       try {
-        const res = await axios.post(
-          "http://localhost:3000/api/auth/refresh-token",
-          {},
-          { withCredentials: true },
-        );
+        const res = await refreshToken();
 
         accessToken = res.data.accessToken;
 
