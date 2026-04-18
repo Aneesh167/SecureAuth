@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useState } from "react";
 import { createContext } from "react";
-import { getProfile, refreshToken } from "../API/authApi";
+import { getProfile, refreshToken } from "../API/authApi.js";
 import { useContext } from "react";
 import { setAccessToken as setAxiosToken } from "../API/axios";
 import { setLogoutHandler } from "../API/axios";
