@@ -36,12 +36,7 @@ api.interceptors.response.use(
       originalRequest._retry = true;
 
       try {
-        const res = await axios.post(
-          `${import.meta.env.VITE_API_BASE_URL}/api/auth/refresh-token`,
-          {},
-          { withCredentials: true },
-        );
-
+        const res = await api.post("/api/auth/refresh-token", {});
         accessToken = res.data.accessToken;
 
         originalRequest.headers.Authorization = `Bearer ${accessToken}`;
