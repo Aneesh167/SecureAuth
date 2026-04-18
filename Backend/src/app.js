@@ -5,15 +5,27 @@ import cors from "cors";
 import { config } from "./config/config.js";
 const app = express();
 
+const allowedOrigins = config.CLIENT_USER.split(",")
+  .map((origin) => origin.trim())
+  .filter((origin) => origin.length > 0);
+
+const corsOptions = {
+  origin(origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  credentials: true,
+  optionsSuccessStatus: 200,
+};
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.use(
-  cors({
-    origin: config.CLIENT_USER,
-    credentials: true,
-  }),
-);
+app.use(cors(corsOptions));
+app.options("*", cors(corsOptions));
 app.use("/api/auth", authRoute);
 
 export default app;

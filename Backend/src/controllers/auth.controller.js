@@ -15,6 +15,7 @@ const refreshCookieOptions = {
   httpOnly: true,
   secure: true,
   sameSite: "none",
+  path: "/",
   maxAge: 7 * 24 * 60 * 60 * 1000,
 };
 
@@ -207,7 +208,7 @@ export const logoutUser = async (req, res) => {
     }
     session.revoked = true;
     await session.save();
-    res.clearCookie("refreshToken");
+    res.clearCookie("refreshToken", refreshCookieOptions);
     return res.status(200).json({ message: "Logout successfull" });
   } catch (error) {
     return res
@@ -231,7 +232,7 @@ export const logoutAllUser = async (req, res) => {
         revoked: true,
       },
     );
-    res.clearCookie("refreshToken");
+    res.clearCookie("refreshToken", refreshCookieOptions);
     return res
       .status(200)
       .json({ message: "Logout from all devices successfull" });
