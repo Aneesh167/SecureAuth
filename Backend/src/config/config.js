@@ -26,6 +26,9 @@ if (!process.env.GOOGLE_REFRESH_TOKEN) {
 if (!process.env.GOOGLE_USER) {
   throw new Error("GOOGLE_USER is not defined in the environment variables.");
 }
+if (!process.env.CLIENT_USER) {
+  throw new Error("CLIENT_USER is not defined in the environment variables.");
+}
 export const config = {
   MONGO_URI: process.env.MONGO_URI,
   GOOGLE_USER: process.env.GOOGLE_USER,
@@ -33,4 +36,5 @@ export const config = {
   GOOGLE_REFRESH_TOKEN: process.env.GOOGLE_REFRESH_TOKEN,
   GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET,
   GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
+  CLIENT_USER: process.env.CLIENT_USER,
 };
