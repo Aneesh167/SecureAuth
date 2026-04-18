@@ -262,7 +262,7 @@ export const sendOtp = async (req, res) => {
     await otpModel.create({
       email,
       otpHash,
-      expiresAt: Date.now() + 5 * 60 * 1000,
+      expiresAt: new Date(Date.now() + 5 * 60 * 1000),
     });
 
     await sendEmail(
